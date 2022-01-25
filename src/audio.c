@@ -28,6 +28,8 @@ static int               wridx    = 0;
 static int               buf_cnt  = 0;
 static int               num_bufs = 0;
 
+uint32_t next_ym_write_valid_tick;
+
 static void
 audio_callback(void *userdata, Uint8 *stream, int len)
 {
@@ -101,8 +103,10 @@ audio_init(const char *dev_name, int num_audio_buffers)
 		exit(-1);
 	}
 
+	next_ym_write_valid_tick = 0;
+
 	// Init YM2151 emulation. 3.579545 MHz clock
-	YM_Create(3579545);
+	YM_Create(YM_CLOCK_HZ);
 	YM_init(obtained.freq, 60);
 
 	// Start playback

@@ -73,7 +73,11 @@ real_read6502(uint16_t address, bool debugOn, uint8_t bank)
 		} else if (address >= 0x9f20 && address < 0x9f40) {
 			return video_read(address & 0x1f, debugOn);
 		} else if (address >= 0x9f40 && address < 0x9f60) {
-			return 0;
+			if (address == 0x9f41 && clockticks6502 < next_ym_write_valid_tick) {
+				return YM2151_BUSY;
+			} else {
+				return 0;
+			}
 		} else if (address >= 0x9fb0 && address < 0x9fc0) {
 			// emulator state
 			return emu_read(address & 0xf, debugOn);
@@ -110,7 +114,10 @@ write6502(uint16_t address, uint8_t value)
 			if (address == 0x9f40) {        // YM address
 				addr_ym = value;
 			} else if (address == 0x9f41) { // YM data
-				YM_write_reg(addr_ym, value);
+				if (clockticks6502 >= next_ym_write_valid_tick) {
+					YM_write_reg(addr_ym, value);
+					next_ym_write_valid_tick = clockticks6502 + YM_WRITE_BUSY_TICKS;
+				}
 			}
 			// TODO:
 			//   $9F42 & $9F43: SAA1099P
