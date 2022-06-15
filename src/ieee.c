@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <SDL.h>
 #include "memory.h"
 #include "ieee.h"

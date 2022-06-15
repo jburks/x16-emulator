@@ -156,7 +156,8 @@ static uint16_t getvalue() {
         else return((uint16_t)read6502(ea));
 }
 
-__attribute__((unused)) static uint16_t getvalue16() {
+[[maybe_unused]]
+static uint16_t getvalue16() {
     return((uint16_t)read6502(ea) | ((uint16_t)read6502(ea+1) << 8));
 }
 

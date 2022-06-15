@@ -6,7 +6,7 @@
 #include "video.h"
 #include <SDL.h>
 #include <stdio.h>
-#include <unistd.h>
+//#include <unistd.h>
 
 int frames;
 int32_t sdlTicks_base;
