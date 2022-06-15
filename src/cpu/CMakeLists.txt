@@ -3,6 +3,8 @@ add_library (cpu
    fake6502.c
 )
 
+set_property(TARGET cpu PROPERTY C_STANDARD 17)
+
 find_package(SDL2)
 
 set(SRCS
@@ -45,4 +47,3 @@ target_link_libraries(cpu
 )
 
 set_target_properties(cpu PROPERTIES ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/obj")
-set_property(TARGET cpu PROPERTY CXX_STANDARD 17)

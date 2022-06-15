@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <sys/stat.h>
-#include <dirent.h>
+#include "dirent.h"
 //#include <unistd.h>
 #include <SDL.h>
 #include "memory.h"
@@ -485,9 +485,9 @@ int
 MACPTR(uint16_t addr, uint16_t *c)
 {
 	int ret = -1;
-	int count = *c ?: 256;
+	uint16_t count = (*c) ? *c :256;
 	uint8_t ram_bank = read6502(0);
-	int i = 0;
+	uint16_t i = 0;
 	do {
 		uint8_t byte = 0;
 		ret = ACPTR(&byte);

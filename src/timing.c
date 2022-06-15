@@ -7,6 +7,7 @@
 #include <SDL.h>
 #include <stdio.h>
 //#include <unistd.h>
+#include <Windows.h>
 
 int frames;
 int32_t sdlTicks_base;
@@ -21,6 +22,21 @@ timing_init() {
 	last_perf_update = 0;
 	perf_frame_count = 0;
 }
+
+#ifdef _MSC_VER
+void usleep(unsigned int usec)
+{
+	HANDLE timer;
+	LARGE_INTEGER ft;
+
+	ft.QuadPart = -(10 * (__int64)usec);
+
+	timer = CreateWaitableTimer(NULL, TRUE, NULL);
+	SetWaitableTimer(timer, &ft, 0, NULL, NULL, 0);
+	WaitForSingleObject(timer, INFINITE);
+	CloseHandle(timer);
+}
+#endif
 
 void
 timing_update()

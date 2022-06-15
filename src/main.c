@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-//#include <unistd.h>
+#include "unistd.h"
 #include <limits.h>
 #ifdef __MINGW32__
 #include <ctype.h>
@@ -498,7 +498,7 @@ int
 main(int argc, char **argv)
 {
 	char *rom_filename = "rom.bin";
-	char rom_path_data[PATH_MAX];
+	char rom_path_data[FILENAME_MAX];
 
 	char *rom_path = rom_path_data;
 	char *prg_path = NULL;
@@ -518,7 +518,7 @@ main(int argc, char **argv)
 	// This causes the emulator to load ROM data from the executable's directory when
 	// no ROM file is specified on the command line.
 	memcpy(rom_path, base_path, strlen(base_path) + 1);
-	strncpy(rom_path + strlen(rom_path), rom_filename, PATH_MAX - strlen(rom_path));
+	strncpy(rom_path + strlen(rom_path), rom_filename, FILENAME_MAX - strlen(rom_path));
 
 	argc--;
 	argv++;

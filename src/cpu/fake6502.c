@@ -148,8 +148,8 @@ extern void write6502(uint16_t address, uint8_t value);
 #include "support.h"
 #include "modes.h"
 
-static void (*addrtable[256])();
-static void (*optable[256])();
+extern void (*addrtable[256])();
+extern void (*optable[256])();
 
 static uint16_t getvalue() {
     if (addrtable[opcode] == acc) return((uint16_t)a);
@@ -240,7 +240,7 @@ void step6502() {
     if (callexternal) (*loopexternal)();
 }
 
-void hookexternal(void *funcptr) {
+void hookexternal(void (*funcptr)()) {
     if (funcptr != (void *)NULL) {
         loopexternal = funcptr;
         callexternal = 1;

@@ -52,6 +52,10 @@ ps2_buffer_pop_oldest(int i)
 	return value;
 }
 
+#ifdef _MSC_VER
+#define __builtin_parity(x) (__popcnt(x)&1)
+#endif
+
 void
 ps2_step(int i, int clocks)
 {

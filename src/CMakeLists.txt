@@ -21,6 +21,7 @@ set(SRCS
     sdcard.c
     serial.c
     smc.c
+    testbench.c
     timing.c
     vera_pcm.c
     vera_psg.c
@@ -49,6 +50,7 @@ set(HEADERS
     serial.h
     smc.h
     timing.h
+    testbench.h
     utf8.h
     utf8_encode.h
     vera_pcm.h
