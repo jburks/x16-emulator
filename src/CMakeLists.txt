@@ -15,7 +15,6 @@ set(SRCS
     keyboard.c
     main.c
     memory.c
-    ps2.c
     rendertext.c
     rtc.c
     sdcard.c
@@ -42,7 +41,6 @@ set(HEADERS
     joystick.h
     keyboard.h
     memory.h
-    ps2.h
     rendertext.h
     rom_symbols.h
     rtc.h
